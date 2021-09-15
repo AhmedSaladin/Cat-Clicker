@@ -5,21 +5,8 @@ const cats = [
   { name: "Mandy", path: "cat4.jpg", counter: 0 },
   { name: "Jack", path: "cat5.jpg", counter: 0 },
 ];
-const catList = document.getElementsByClassName("cat-list")[0];
+
 const catContainer = document.getElementsByClassName("cat-container")[0];
-
-for (let i = 0; i < cats.length; i++) {
-  const button = document.createElement("button");
-  button.innerText = cats[i].name;
-  button.className = "cat-button";
-  button.value = i;
-  button.onclick = function () {
-    const catPic = document.getElementsByClassName("cat-pic")[0];
-    catPic.src = `img/${cats[this.value].path}`;
-  };
-  catList.appendChild(button);
-}
-
 const img = document.createElement("img");
 const p = document.createElement("p");
 p.textContent = `Please don't click on ${cats[0].name}`;
@@ -34,3 +21,32 @@ img.onclick = () => {
 };
 catContainer.appendChild(p);
 catContainer.appendChild(img);
+
+const catList = document.getElementsByClassName("cat-list")[0];
+for (let i = 0; i < cats.length; i++) {
+  const button = document.createElement("button");
+  button.innerText = cats[i].name;
+  button.className = "cat-button";
+  button.value = i;
+  button.onclick = function () {
+    const catPic = document.getElementsByClassName("cat-pic")[0];
+    const catName = document.getElementsByClassName("cat-name")[0];
+
+    if (cats[this.value].counter != 0) {
+      catName.textContent = `You clicked on ${cats[this.value].name}: ${
+        cats[this.value].counter
+      } times`;
+    } else {
+      catName.textContent = `Please don't click on ${cats[this.value].name}`;
+    }
+
+    catPic.src = `img/${cats[this.value].path}`;
+    catPic.onclick = () => {
+      cats[this.value].counter++;
+      catName.textContent = `You clicked on ${cats[this.value].name}: ${
+        cats[this.value].counter
+      } times`;
+    };
+  };
+  catList.appendChild(button);
+}
