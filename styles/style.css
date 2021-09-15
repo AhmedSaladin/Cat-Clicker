@@ -1,8 +1,21 @@
-.container {
-  margin: 10px auto;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.cat{
-  width: 500px;
-  height: 250px;
+.container {
+  display: flex;
+  gap: 30px;
+  width: 800px;
+  margin: 50px auto;
+}
+
+.cat-container {
+  background-color: aqua;
+}
+
+.cat-list {
+  background-color: green;
+  order: -1;
 }
