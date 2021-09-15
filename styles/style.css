@@ -13,9 +13,17 @@
 
 .cat-container {
   background-color: aqua;
+  width: 600px;
 }
 
 .cat-list {
-  background-color: green;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 30px;
   order: -1;
+}
+
+.cat-button{
+  padding: 10px;
 }
