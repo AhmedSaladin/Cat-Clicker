@@ -23,6 +23,11 @@
   order: -1;
 }
 
-.cat-button{
+.cat-button {
   padding: 10px;
+}
+
+.cat-pic {
+  display: block;
+  width: 70%;
 }
