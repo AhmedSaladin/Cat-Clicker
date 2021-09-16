@@ -22,31 +22,38 @@ img.onclick = () => {
 catContainer.appendChild(p);
 catContainer.appendChild(img);
 
-const catList = document.getElementsByClassName("cat-list")[0];
-for (let i = 0; i < cats.length; i++) {
-  const button = document.createElement("button");
-  button.innerText = cats[i].name;
-  button.className = "cat-button";
-  button.value = i;
-  button.onclick = function () {
-    const catPic = document.getElementsByClassName("cat-pic")[0];
-    const catName = document.getElementsByClassName("cat-name")[0];
 
-    if (cats[this.value].counter != 0) {
-      catName.textContent = `You clicked on ${cats[this.value].name}: ${
-        cats[this.value].counter
-      } times`;
-    } else {
-      catName.textContent = `Please don't click on ${cats[this.value].name}`;
+ const view={
+   catArea:,
+   catList:(list)=>{
+    const catList = document.getElementsByClassName("cat-list")[0];
+    for (let i = 0; i < list.length; i++) {
+      const button = document.createElement("button");
+      button.innerText = list[i].name;
+      button.className = "cat-button";
+      button.value = i;
+      button.onclick = function () {
+        const catPic = document.getElementsByClassName("cat-pic")[0];
+        const catName = document.getElementsByClassName("cat-name")[0];
+    
+        if (list[this.value].counter != 0) {
+          catName.textContent = `You clicked on ${list[this.value].name}: ${
+            list[this.value].counter
+          } times`;
+        } else {
+          catName.textContent = `Please don't click on ${list[this.value].name}`;
+        }
+    
+        catPic.src = `img/${list[this.value].path}`;
+        catPic.onclick = () => {
+          list[this.value].counter++;
+          catName.textContent = `You clicked on ${list[this.value].name}: ${
+            list[this.value].counter
+          } times`;
+        };
+      };
+      catList.appendChild(button);
     }
-
-    catPic.src = `img/${cats[this.value].path}`;
-    catPic.onclick = () => {
-      cats[this.value].counter++;
-      catName.textContent = `You clicked on ${cats[this.value].name}: ${
-        cats[this.value].counter
-      } times`;
-    };
-  };
-  catList.appendChild(button);
-}
+   },
+   init:
+ }
