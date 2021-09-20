@@ -13,6 +13,7 @@
 
 .cat-container {
   width: 600px;
+  height: 300px;
 }
 
 .cat-list {
@@ -27,9 +28,15 @@
   padding: 10px;
 }
 
+.admin-button {
+  padding: 10px;
+}
+
 .cat-pic {
   display: block;
   width: 70%;
+  height: 90%;
+  margin-bottom: 25px;
 }
 
 .cat-name {
