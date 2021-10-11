@@ -9,6 +9,7 @@
   gap: 30px;
   width: 800px;
   margin: 50px auto;
+  align-items: center;
 }
 
 .cat-container {
@@ -40,5 +41,13 @@
 }
 
 .cat-name {
+  margin-bottom: 10px;
+}
+
+.cat-url {
+  margin-bottom: 10px;
+}
+
+.cat-clicks {
   margin-bottom: 10px;
 }
