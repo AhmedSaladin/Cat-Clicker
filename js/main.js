@@ -54,15 +54,31 @@ const catListView = {
 
 const updateCatInfo = {
   init: function () {
-    this.render();
+    this.viewControl = document.getElementsByClassName("admin-button")[0];
+    this.catInfo = document.getElementsByClassName("update-cat-info")[0];
+    this.catInfo.style.display = "none";
+    this.viewControl.onclick = () => {
+      if (this.catInfo.style.display === "none") {
+        this.catInfo.style.display = "block";
+        this.render();
+      } else this.catInfo.style.display = "none";
+    };
   },
+
   render: function () {
     const cat = octopus.getCurrentCat();
-    const catName = (document.getElementById("cat-name-i").value = cat.name);
-    const catUrl = (document.getElementById("cat-url-i").value = cat.path);
-    const catClicks = (document.getElementById("cat-clicks-i").value =
-      cat.counter);
+    const catName = document.getElementById("cat-name-i");
+    const catUrl = document.getElementById("cat-url-i");
+    const catClicks = document.getElementById("cat-clicks-i");
     const updateInfo = document.getElementById("cat-update-info");
+    catName.value = cat.name;
+    catUrl.value = cat.path;
+    catClicks.value = cat.counter;
+    updateInfo.onclick = () => {
+      if (cat.name != catName.value) console.log("update name");
+      if (cat.path != catUrl.value) console.log("update path");
+      if (cat.counter != catClicks.value) console.log("update value");
+    };
   },
 };
 
@@ -84,12 +100,13 @@ const octopus = {
 
   setCurrentCat: (cat) => {
     catModel.currentCat = cat;
+    updateCatInfo.render();
   },
 
   incrementCatCounter: () => {
     catModel.currentCat.counter++;
     catView.render();
-    updateCatInfo.init();
+    updateCatInfo.render();
   },
 };
 
