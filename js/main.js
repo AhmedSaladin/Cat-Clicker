@@ -1,11 +1,11 @@
 const catModel = {
   currentCat: null,
   cats: [
-    { name: "Lily", path: "cat.jpg", counter: 0 },
-    { name: "Max", path: "cat2.jpg", counter: 0 },
-    { name: "Loby", path: "cat3.jpg", counter: 0 },
-    { name: "Mandy", path: "cat4.jpg", counter: 0 },
-    { name: "Jack", path: "cat5.jpg", counter: 0 },
+    { name: "Lily", path: "img/cat.jpg", counter: 0 },
+    { name: "Max", path: "img/cat2.jpg", counter: 0 },
+    { name: "Loby", path: "img/cat3.jpg", counter: 0 },
+    { name: "Mandy", path: "img/cat4.jpg", counter: 0 },
+    { name: "Jack", path: "img/cat5.jpg", counter: 0 },
   ],
 };
 
@@ -24,7 +24,7 @@ const catView = {
     if (currentCat.counter !== 0)
       this.catName.textContent = `You clicked on ${currentCat.name}: ${currentCat.counter} times`;
     else this.catName.textContent = `Please don't click on ${currentCat.name}`;
-    this.catImg.src = `img/${currentCat.path}`;
+    this.catImg.src = `${currentCat.path}`;
     this.catImg.alt = currentCat.name;
   },
 };
@@ -52,11 +52,26 @@ const catListView = {
   },
 };
 
+const updateCatInfo = {
+  init: function () {
+    this.render();
+  },
+  render: function () {
+    const cat = octopus.getCurrentCat();
+    const catName = (document.getElementById("cat-name-i").value = cat.name);
+    const catUrl = (document.getElementById("cat-url-i").value = cat.path);
+    const catClicks = (document.getElementById("cat-clicks-i").value =
+      cat.counter);
+    const updateInfo = document.getElementById("cat-update-info");
+  },
+};
+
 const octopus = {
   init: function () {
     catModel.currentCat = catModel.cats[0];
     catListView.init();
     catView.init();
+    updateCatInfo.init();
   },
 
   getCurrentCat: () => {
@@ -74,6 +89,7 @@ const octopus = {
   incrementCatCounter: () => {
     catModel.currentCat.counter++;
     catView.render();
+    updateCatInfo.init();
   },
 };
 
