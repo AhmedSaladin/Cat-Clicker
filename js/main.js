@@ -50,6 +50,12 @@ const catListView = {
       this.catList.appendChild(button);
     }
   },
+  
+  cleanUp: function () {
+    while (this.catList.firstChild)
+      this.catList.removeChild(this.catList.firstChild);
+    this.render();
+  },
 };
 
 const updateCatInfo = {
@@ -75,9 +81,14 @@ const updateCatInfo = {
     catUrl.value = cat.path;
     catClicks.value = cat.counter;
     updateInfo.onclick = () => {
-      if (cat.name != catName.value) console.log("update name");
-      if (cat.path != catUrl.value) console.log("update path");
-      if (cat.counter != catClicks.value) console.log("update value");
+      if (cat.name != catName.value) {
+        cat.name = catName.value;
+        octopus.updateCatInfo(cat);
+      }
+      if (cat.path != catUrl.value) cat.path = catUrl.value;
+      if (cat.counter != catClicks.value) cat.counter = catClicks.value;
+      octopus.updateCatView();
+      this.catInfo.style.display = "none";
     };
   },
 };
@@ -107,6 +118,23 @@ const octopus = {
     catModel.currentCat.counter++;
     catView.render();
     updateCatInfo.render();
+  },
+
+  updateCatInfo: function (cat) {
+    const currentCat = this.getCurrentCat();
+    let currentCats = [...this.getCats()];
+    currentCats = currentCats.filter((c) => c.name != currentCat.name);
+    currentCats.push(cat);
+    this.setCats(currentCats);
+  },
+
+  setCats: (cats) => {
+    catModel.cats = cats;
+    catListView.cleanUp();
+  },
+
+  updateCatView: () => {
+    catView.render();
   },
 };
 
